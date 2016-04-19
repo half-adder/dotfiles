@@ -30,6 +30,8 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
+set clipboard=unnamed
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -40,7 +42,7 @@ set number
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
