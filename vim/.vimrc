@@ -1,9 +1,37 @@
 " Much of this was shamelessly stolen from
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 
-
 " don't bother with vi compatibility
 set nocompatible
+" required
+filetype off
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle - setup
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle - plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'klen/python-mode'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'fatih/vim-go'
+Plugin 'altercation/vim-colors-solarized'
+
+
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
+
+" All plugins must be added before the following line
+call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -75,11 +103,23 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" make the bottom airline thing always appear
+" set laststatus=2
+
+" open NerdTree with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+
+" Make NerdTree ignore files I don't care about (compiled python files, etc.)
+let NERDTreeIgnore = ['.pyc$',]
+
+" Automatically fix PEP8 errors in the current buffer:
+noremap <F8> :PymodeLintAuto<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 try
     colorscheme solarized
@@ -108,7 +148,8 @@ set nowb
 set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" => Text, tab and indent related 
 " Use spaces instead of tabs
 set expandtab
 
@@ -126,3 +167,43 @@ set tw=500
 set ai   "Auto indent
 set si   "Smart indent
 set wrap "Wrap lines
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Python-mode
+" Activate rope
+" Keys:
+" K             Show python docs
+" <Ctrl-Space>  Rope autocomplete
+" <Ctrl-c>g     Rope goto definition
+" <Ctrl-c>d     Rope show documentation
+" <Ctrl-c>f     Rope find occurrences
+" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+
+let g:pymode_rope = 1
+
+" Documentation
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+
+" Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8"
+
+" Auto check on save
+let g:pymode_lint_write = 1
+
+" Support virtualenv
+let g:pymode_virtualenv = 1
+
+" syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Don't autofold code
+let g:pymode_folding = 0
