@@ -27,8 +27,7 @@ Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+
 " All plugins must be added before the following line
 call vundle#end()
 
@@ -69,9 +68,6 @@ set number
 "Always show current position
 set ruler
 
-" Show current line
-:set cursorline
-
 " Height of the command bar
 set cmdheight=1
 
@@ -98,7 +94,7 @@ set lazyredraw
 set showmatch 
 
 " How many tenths of a second to blink when matching brackets
-set mat=1
+set mat=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -163,13 +159,13 @@ set lbr
 set tw=500
 
 "Auto indent
-set ai 
+set ai   
 
 "Smart indent
-set si
+set si   
 
 "Wrap lines
-set wrap
+set wrap 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
@@ -215,8 +211,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" Syntastic plugins
-let g:syntastic_javascript_checkers = ['eslint']
 
 """""""""""""""
 " NerdTree
