@@ -74,7 +74,7 @@ setlocal cm=blowfish2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" show absoluteline number for current line
+" show line numbers
 set number
 
 " show relative linenos for all other lines
@@ -82,6 +82,9 @@ set number
 
 "Always show current position
 set ruler
+
+" Show current line
+:set cursorline
 
 " Height of the command bar
 set cmdheight=1
@@ -109,7 +112,7 @@ set lazyredraw
 set showmatch 
 
 " How many tenths of a second to blink when matching brackets
-set mat=2
+set mat=1
 
 " No annoying sound on errors
 set noerrorbells
@@ -146,6 +149,7 @@ let g:airline_symbols.space = "\ua0"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Enable syntax highlighting
 syntax enable
 
@@ -154,6 +158,7 @@ try
 catch
 endtry
 
+" Background colors
 set background=light
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -170,14 +175,16 @@ let g:solarized_contrast="high"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" => Text, tab and indent relate
 " Use spaces instead of tabs
 set expandtab
 
@@ -192,26 +199,22 @@ set tabstop=4
 " set lbr
 " set tw=500
 
-set ai   "Auto indent
-set si   "Smart indent
-set wrap "Wrap lines
-" (soft) break on words instead of inside words
-set linebreak
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python-mode
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
+"Auto indent
+set ai 
 
+"Smart indent
+set si
+
+"Wrap lines
+set wrap
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""
+" Python Mode
+"""""""""""""""
 let g:pymode_rope = 1
 
 " Documentation
@@ -248,3 +251,28 @@ let g:pymode_folding = 0
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"""""""""""""""
+" Syntastic
+"""""""""""""""
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Syntastic plugins
+let g:syntastic_javascript_checkers = ['eslint']
+
+"""""""""""""""
+" NerdTree
+"""""""""""""""
+
+" open NerdTree with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+
+" Make NerdTree ignore files I don't care about (compiled python files, etc.)
+let NERDTreeIgnore = ['.pyc$',]
