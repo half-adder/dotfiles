@@ -6,7 +6,6 @@ set nocompatible
 " required
 filetype off
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle - setup
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -25,10 +24,19 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
-
-
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'rking/ag.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mattn/emmet-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'valloric/MatchTagAlways'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'jiangmiao/auto-pairs'
 
 " All plugins must be added before the following line
 call vundle#end()
@@ -60,11 +68,17 @@ command W w !sudo tee % > /dev/null
 
 set clipboard=unnamed
 
+" set the encryption method to be strong (requires v>=7.4.399)
+setlocal cm=blowfish2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" show line numbers
+" show absoluteline number for current line
 set number
+
+" show relative linenos for all other lines
+" set relativenumber
 
 "Always show current position
 set ruler
@@ -103,18 +117,32 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" Highlight current line
+set cursorline
+
 " make the bottom airline thing always appear
-" set laststatus=2
+set laststatus=2
 
 " open NerdTree with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
 
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
-let NERDTreeIgnore = ['.pyc$',]
+let NERDTreeIgnore = ['.pyc$', '.out$']
 
 " Automatically fix PEP8 errors in the current buffer:
 noremap <F8> :PymodeLintAuto<CR>
 
+" Disable line too long message in python
+" let g:pymode_lint_message = 1  
+
+let g:airline_powerline_fonts = 1 
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" let g:airline_theme='solarized-dark'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,7 +154,7 @@ try
 catch
 endtry
 
-set background=dark
+set background=light
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -135,7 +163,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Make vim pretty with tmux
-let g:solarized_termcolors=256 
+let g:solarized_termcolors=256
 let g:solarized_visibility="high"
 let g:solarized_contrast="high"
 
@@ -149,7 +177,7 @@ set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" => Text, tab and indent related 
+" => Text, tab and indent relate
 " Use spaces instead of tabs
 set expandtab
 
@@ -161,13 +189,14 @@ set shiftwidth=4
 set tabstop=4
 
 " Linebreak on 500 characters
-set lbr
-set tw=500
+" set lbr
+" set tw=500
 
 set ai   "Auto indent
 set si   "Smart indent
 set wrap "Wrap lines
-
+" (soft) break on words instead of inside words
+set linebreak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python-mode
 " Activate rope
@@ -186,7 +215,7 @@ set wrap "Wrap lines
 let g:pymode_rope = 1
 
 " Documentation
-let g:pymode_doc = 1
+let g:pymode_doc = 0 
 let g:pymode_doc_key = 'K'
 
 " Linting
@@ -205,5 +234,17 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
+" Autocompletion
+let g:pymode_rope_complete_on_dot = 0
+
 " Don't autofold code
 let g:pymode_folding = 0
+
+
+""""""""""""""""
+" => UltiSnips
+""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
