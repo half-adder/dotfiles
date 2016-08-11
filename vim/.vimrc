@@ -24,7 +24,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
-<<<<<<< HEAD
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'rking/ag.vim'
@@ -39,12 +38,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
 
-=======
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 " All plugins must be added before the following line
 call vundle#end()
 
@@ -128,7 +121,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-<<<<<<< HEAD
 " Highlight current line
 set cursorline
 
@@ -141,8 +133,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
 let NERDTreeIgnore = ['.pyc$', '.out$']
 
-=======
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 " Automatically fix PEP8 errors in the current buffer:
 noremap <F8> :PymodeLintAuto<CR>
 
@@ -207,13 +197,8 @@ set shiftwidth=4
 set tabstop=4
 
 " Linebreak on 500 characters
-<<<<<<< HEAD
 " set lbr
 " set tw=500
-=======
-set lbr
-set tw=500
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 
 "Auto indent
 set ai 
@@ -259,7 +244,6 @@ let g:pymode_rope_complete_on_dot = 0
 " Don't autofold code
 let g:pymode_folding = 0
 
-<<<<<<< HEAD
 
 """"""""""""""""
 " => UltiSnips
@@ -275,22 +259,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-=======
-"""""""""""""""
-" Syntastic
-"""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Syntastic plugins
-let g:syntastic_javascript_checkers = ['eslint']
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" 
+" " Syntastic plugins
+" let g:syntastic_javascript_checkers = ['eslint']
 
 """""""""""""""
 " NerdTree
@@ -301,9 +277,3 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
 let NERDTreeIgnore = ['.pyc$',]
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
