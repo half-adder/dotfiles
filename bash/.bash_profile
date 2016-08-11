@@ -18,8 +18,3 @@ if [ ! -f ~/.git-completion.bash ]; then
     wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -O ~/.git-completion.bash
 fi
 source ~/.git-completion.bash
-
-export GOPATH=/Users/sjohnsen/dev/personal/go
-
-export PATH=$GOPATH/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:
-
