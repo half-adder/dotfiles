@@ -1,4 +1,7 @@
 vim/.vim/bundle/*
+<<<<<<< HEAD
 .DS_Store
 
 vim/.vim/bundle/
+=======
+>>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e

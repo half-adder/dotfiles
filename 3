@@ -6,6 +6,7 @@ set nocompatible
 " required
 filetype off
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle - setup
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -24,27 +25,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
-<<<<<<< HEAD
-Plugin 'tpope/vim-surround'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'rking/ag.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mattn/emmet-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'valloric/MatchTagAlways'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-Plugin 'jiangmiao/auto-pairs'
-
-=======
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/syntastic'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
+
 " All plugins must be added before the following line
 call vundle#end()
 
@@ -75,9 +58,6 @@ command W w !sudo tee % > /dev/null
 
 set clipboard=unnamed
 
-" set the encryption method to be strong (requires v>=7.4.399)
-setlocal cm=blowfish2
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -85,14 +65,8 @@ setlocal cm=blowfish2
 " show line numbers
 set number
 
-" show relative linenos for all other lines
-" set relativenumber
-
 "Always show current position
 set ruler
-
-" Show current line
-:set cursorline
 
 " Height of the command bar
 set cmdheight=1
@@ -120,7 +94,7 @@ set lazyredraw
 set showmatch 
 
 " How many tenths of a second to blink when matching brackets
-set mat=1
+set mat=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -128,35 +102,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
-<<<<<<< HEAD
-" Highlight current line
-set cursorline
-
-" make the bottom airline thing always appear
-set laststatus=2
-
-" open NerdTree with Ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-
-" Make NerdTree ignore files I don't care about (compiled python files, etc.)
-let NERDTreeIgnore = ['.pyc$', '.out$']
-
-=======
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 " Automatically fix PEP8 errors in the current buffer:
 noremap <F8> :PymodeLintAuto<CR>
 
-" Disable line too long message in python
-" let g:pymode_lint_message = 1  
-
-let g:airline_powerline_fonts = 1 
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-
-" let g:airline_theme='solarized-dark'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -179,7 +127,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Make vim pretty with tmux
-let g:solarized_termcolors=256
+let g:solarized_termcolors=256 
 let g:solarized_visibility="high"
 let g:solarized_contrast="high"
 
@@ -207,22 +155,17 @@ set shiftwidth=4
 set tabstop=4
 
 " Linebreak on 500 characters
-<<<<<<< HEAD
-" set lbr
-" set tw=500
-=======
 set lbr
 set tw=500
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 
 "Auto indent
-set ai 
+set ai   
 
 "Smart indent
-set si
+set si   
 
 "Wrap lines
-set wrap
+set wrap 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
@@ -234,7 +177,7 @@ set wrap
 let g:pymode_rope = 1
 
 " Documentation
-let g:pymode_doc = 0 
+let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
 " Linting
@@ -253,44 +196,21 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
-" Autocompletion
-let g:pymode_rope_complete_on_dot = 0
-
 " Don't autofold code
 let g:pymode_folding = 0
 
-<<<<<<< HEAD
-
-""""""""""""""""
-" => UltiSnips
-""""""""""""""""
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-"""""""""""""""
-" Syntastic
-"""""""""""""""
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-=======
 """""""""""""""
 " Syntastic
 """""""""""""""
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" Syntastic plugins
-let g:syntastic_javascript_checkers = ['eslint']
 
 """""""""""""""
 " NerdTree
@@ -301,9 +221,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
 let NERDTreeIgnore = ['.pyc$',]
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> fc06ac4ca83710dd66b3d2959b5f20b8d6d8210e
