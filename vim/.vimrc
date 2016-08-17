@@ -37,6 +37,8 @@ Plugin 'valloric/MatchTagAlways'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'mxw/vim-jsx'
 
 " All plugins must be added before the following line
 call vundle#end()
@@ -133,12 +135,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
 let NERDTreeIgnore = ['.pyc$', '.out$']
 
-" Automatically fix PEP8 errors in the current buffer:
-noremap <F8> :PymodeLintAuto<CR>
-
-" Disable line too long message in python
-" let g:pymode_lint_message = 1  
-
 let g:airline_powerline_fonts = 1 
 
 if !exists('g:airline_symbols')
@@ -147,6 +143,15 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " let g:airline_theme='solarized-dark'
+
+" Make movement between windows easier - CTRL-{h | j | k | l}
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+
+" Let vim windows be resized by mouse
+set mouse=n
+set ttymouse=xterm2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -160,8 +165,11 @@ catch
 endtry
 
 " Background colors
-set background=light
-
+if strftime("%H") <= 19
+  set background=dark
+else
+  set background=dark
+endif
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -244,6 +252,13 @@ let g:pymode_rope_complete_on_dot = 0
 " Don't autofold code
 let g:pymode_folding = 0
 
+let g:pymode_options_max_line_length = 120
+
+" Automatically fix PEP8 errors in the current buffer:
+noremap <F8> :PymodeLintAuto<CR>
+
+" Disable line too long message in python
+let g:pymode_lint_message = 0
 
 """"""""""""""""
 " => UltiSnips
@@ -277,3 +292,17 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
 let NERDTreeIgnore = ['.pyc$',]
+
+"""""""""""""""
+" Easy-Align
+"""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"""""""""""""""
+" Vim-JSX
+"""""""""""""""
+let g:jsx_ext_required = 0
