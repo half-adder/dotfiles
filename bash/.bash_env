@@ -1,0 +1,4 @@
+# Go Stuff
+export GH=github.com/feuilles
+
+export COWPATH="$COWPATH:$HOME/.cowsay"

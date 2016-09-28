@@ -19,26 +19,17 @@ Plugin 'VundleVim/Vundle.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle - plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'klen/python-mode'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'rking/ag.vim'
-Plugin 'pangloss/vim-javascript'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mattn/emmet-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'valloric/MatchTagAlways'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'junegunn/vim-easy-align'
 Plugin 'mxw/vim-jsx'
+"Plugin 'scrooloose/syntastic'
+Plugin 'klen/python-mode'
 
 " All plugins must be added before the following line
 call vundle#end()
@@ -71,11 +62,13 @@ command W w !sudo tee % > /dev/null
 set clipboard=unnamed
 
 " set the encryption method to be strong (requires v>=7.4.399)
-setlocal cm=blowfish2
+" setlocal cm=blowfish2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set wildignore+=node_modules/,__pycache__
 
 " show line numbers
 set number
@@ -133,7 +126,7 @@ set laststatus=2
 map <C-n> :NERDTreeToggle<CR>
 
 " Make NerdTree ignore files I don't care about (compiled python files, etc.)
-let NERDTreeIgnore = ['.pyc$', '.out$']
+let NERDTreeIgnore = ['.pyc$', '.out$', '__pycache__']
 
 let g:airline_powerline_fonts = 1 
 
@@ -149,8 +142,11 @@ map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 
 " Let vim windows be resized by mouse
-set mouse=n
-set ttymouse=xterm2
+set mouse=a
+if &term =~ '^screen'
+    " tmux support
+    set ttymouse=xterm2
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -166,7 +162,7 @@ endtry
 
 " Background colors
 if strftime("%H") <= 19
-  set background=dark
+  set background=light
 else
   set background=dark
 endif
@@ -194,6 +190,9 @@ set noswapfile
 " => Text, tab and indent related 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Set `_` as a keyword, so it is treated as a word boundary
+" set iskeyword-=_
+
 " Use spaces instead of tabs
 set expandtab
 
@@ -203,10 +202,6 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-
-" Linebreak on 500 characters
-" set lbr
-" set tw=500
 
 "Auto indent
 set ai 
@@ -225,41 +220,36 @@ set wrap
 " Python Mode
 """""""""""""""
 let g:pymode_rope = 1
-
-" Documentation
-let g:pymode_doc = 0 
-let g:pymode_doc_key = 'K'
-
-" Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+" 
+" " Documentation
+" let g:pymode_doc = 0 
+" let g:pymode_doc_key = 'K'
 
 " Auto check on save
 let g:pymode_lint_write = 1
-
+" 
 " Support virtualenv
 let g:pymode_virtualenv = 1
-
+" 
 " syntax highlighting
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
+ 
 " Autocompletion
 let g:pymode_rope_complete_on_dot = 0
 
 " Don't autofold code
 let g:pymode_folding = 0
 
-let g:pymode_options_max_line_length = 120
-
 " Automatically fix PEP8 errors in the current buffer:
 noremap <F8> :PymodeLintAuto<CR>
 
-" Disable line too long message in python
-let g:pymode_lint_message = 0
-
+" Disable specific errors/warning for linting
+" for error codes check:
+" https://pep8.readthedocs.io/en/latest/intro.html#error-codes
+let g:pymode_lint_ignore = "E501,W,E402"
 """"""""""""""""
 " => UltiSnips
 """"""""""""""""
@@ -306,3 +296,18 @@ nmap ga <Plug>(EasyAlign)
 " Vim-JSX
 """""""""""""""
 let g:jsx_ext_required = 0
+
+
+"""""""""""""""
+" Silver Searcher
+"""""""""""""""
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
