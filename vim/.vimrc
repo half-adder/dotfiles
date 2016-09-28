@@ -62,7 +62,9 @@ command W w !sudo tee % > /dev/null
 set clipboard=unnamed
 
 " set the encryption method to be strong (requires v>=7.4.399)
-" setlocal cm=blowfish2
+if v:version > 704
+    setlocal cm=blowfish2
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
